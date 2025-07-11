@@ -115,7 +115,7 @@ const Download = () => {
 
     try {
       // Send to your primary API
-      const response = await fetch("https://34-47-194-149.nip.io/api/download-app/", {
+      const response = await fetch("https://jupka96p9b.execute-api.ap-south-1.amazonaws.com/prod/download", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

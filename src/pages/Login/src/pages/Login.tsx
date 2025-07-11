@@ -37,42 +37,45 @@ const Login: React.FC = () => {
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
+  
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+  setIsLoading(true);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!validateForm()) return
-    setIsLoading(true)
-
-    try {
-      const response = await fetch('https://34-47-194-149.nip.io/api/login/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.email.trim(),
-          password: formData.password
-        })
+  try {
+    const response = await fetch('https://7tju1g065k.execute-api.ap-south-1.amazonaws.com/prod/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: formData.email.trim(),
+        password: formData.password
       })
+    });
 
-      const data = await response.json()
-      if (response.ok && data.data?.token) {
-        sessionStorage.setItem('auth_token', data.data.token)
-        sessionStorage.setItem('auth_user', JSON.stringify(data.data.user))
-        sessionStorage.setItem('auth_email', data.data.user.email)
-        if (data.data.user.email === 'dronesimulatorpro@gmail.com') {
-          navigate('/dash/master/dashboard')
-        } else {
-          navigate('/')
-        }
+    const data = await response.json();
+
+    if (response.ok && data.data?.token) {
+      sessionStorage.setItem('auth_token', data.data.token);
+      sessionStorage.setItem('auth_user', JSON.stringify(data.data.user));
+      sessionStorage.setItem('auth_email', data.data.user.email);
+
+      if (data.data.user.email === 'dronesimulatorpro@gmail.com') {
+        navigate('/dash/master/dashboard');
       } else {
-        setErrors({ submit: data.message || data.error || 'Login failed' })
+        navigate('/');
       }
-    } catch (error) {
-      console.error('Login Error:', error)
-      setErrors({ submit: 'Login failed. Please try again later.' })
-    } finally {
-      setIsLoading(false)
+    } else {
+      setErrors({ submit: data.message || 'Login failed' });
     }
+  } catch (error) {
+    console.error('Login Error:', error);
+    setErrors({ submit: 'Login failed. Please try again later.' });
+  } finally {
+    setIsLoading(false);
   }
+};
+
 
   const handleGoogleLoginSuccess = async (credentialResponse: any) => {
     try {
