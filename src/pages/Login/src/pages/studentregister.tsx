@@ -258,7 +258,7 @@ const Studentregister: React.FC = () => {
     }
 
     try {
-      const response = await fetch('https://34-47-194-149.nip.io/api/register/', {
+      const response = await fetch('https://4cnonsry8a.execute-api.ap-south-1.amazonaws.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

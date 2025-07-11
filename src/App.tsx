@@ -22,6 +22,7 @@ import GeneralPolicy from "./pages/Admindashboard/src/pages/generalpolicy";
 import HelpPage from "./pages/Admindashboard/src/pages/help"; // Always mounted
 import ScrollToTop from "./components/scrolltop";
 import FlyToSkyPage from "./pages/FlyToSkyPage";
+import EmailVerificationSuccess from "./pages/veriy";
 const queryClient = new QueryClient();
 
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/tutorials" element={<Tutorials />} />
             <Route path="/download" element={<Download />} />
             <Route path="/contactus" element={<Contact />} />
+            <Route path="/verify" element={<EmailVerificationSuccess />} />
             <Route path="/product/*" element={<ProductApp />} />
             <Route path="/Dash/*" element={<AdminDash />} />
             <Route path="/auth/*" element={<AppAuth />} />

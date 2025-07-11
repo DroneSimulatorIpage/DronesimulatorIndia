@@ -256,7 +256,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       purpose_of_use: formData.purpose_of_use === 'other' ? formData.purpose_other : formData.purpose_of_use
     };
 
-    const response = await fetch('https://34-47-194-149.nip.io/api/register/', {
+    const response = await fetch('https://4cnonsry8a.execute-api.ap-south-1.amazonaws.com/register', {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
