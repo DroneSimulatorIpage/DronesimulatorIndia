@@ -44,7 +44,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   setIsLoading(true);
 
   try {
-    const response = await fetch('POST https://0w2y7i3yh2.execute-api.ap-south-1.amazonaws.com/login', {
+    const response = await fetch('https://0w2y7i3yh2.execute-api.ap-south-1.amazonaws.com/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
