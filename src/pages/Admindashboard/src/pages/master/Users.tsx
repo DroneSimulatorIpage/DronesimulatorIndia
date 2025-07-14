@@ -169,89 +169,67 @@ export const MasterUsers: React.FC = () => {
       return { status: `Due in ${daysUntilPayment} days`, color: 'text-green-600' };
     }
   };
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const token =
-          sessionStorage.getItem('drone_auth_token') ||
-          localStorage.getItem('drone_auth_token');
-
-        const [usersRes, transactionsRes] = await Promise.all([
-          axiosInstance.get('/get-all-users/'),
-          axios.get('https://34-47-194-149.nip.io/api/stripe/transactions/', {
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          }).catch(() => ({ data: { results: [] } })) // fallback if Stripe API fails
-        ]);
-
-        const userList = usersRes.data.data;
-        const transactions = transactionsRes.data.results || [];
-
-        const normalizeEmail = (email: string) => (email || '').trim().toLowerCase();
-        const formattedUsers = await Promise.all(userList.map(async (user: any) => {
-          const txn = transactions.find((t: any) =>
-            normalizeEmail(t.user_email) === normalizeEmail(user.email)
-          );
-
-          let scenarios = [];
-          try {
-            const scenarioRes = await axiosInstance.post('/get-single-user-details/', {
-              email: user.email
-            });
-            scenarios = scenarioRes.data?.data?.all_scenarios?.scenarios || [];
-          } catch (err) {
-            console.warn(`Failed to load scenarios for ${user.email}`);
-          }
-
-          return {
-            id: user.user_id,
-            name: user.full_name || user.username || 'N/A',
-            email: user.email,
-            status: user.is_active ? 'Active' : 'Inactive',
-            plan: (() => {
-              if (txn?.plan_name_display) {
-                switch (txn.plan_name_display.toLowerCase()) {
-                  case 'trial': return 'Demo';
-                  case 'basic': return 'Free';
-                  case 'premium': return 'Premium';
-                  default: return txn.plan_name_display;
-                }
-              } else {
-                switch ((user.plan || '').toLowerCase()) {
-                  case 'trial': return 'Demo';
-                  case 'premium': return 'Premium';
-                  case 'basic': return 'Free';
-                  default: return user.plan || 'Free';
-                }
-              }
-            })(),
-            paidAmount: txn ? parseFloat(txn.amount) : 0,
-            paymentDate: txn?.payment_date || null,
-            nextPaymentDate: txn?.plan_expiry_date || user.plan_expiry_date || null,
-            addOns: {},
-            customPlan: null,
-            usage: {
-              simulationsThisMonth: user.statistics?.total_scenarios_completed || 0,
-              totalSimulations: user.statistics?.total_app_sessions || 0,
-            },
-            registrationDate: new Date(user.created_at).toLocaleDateString(),
-            scenarios // ✅ Add this
-          };
-        }));
-
-
-        setUsers(formattedUsers);
-      } catch (error) {
-        console.error('Error fetching users or transactions:', error);
-        setUsers([]);
-      } finally {
+useEffect(() => {
+  const fetchUsers = async () => {
+    try {
+      const adminEmail = sessionStorage.getItem('admin_email');
+      if (!adminEmail) {
+        console.warn("Admin email missing from sessionStorage.");
         setLoading(false);
+        return;
       }
-    };
 
-    fetchUsers();
-  }, []);
+      const response = await axios.post(
+        'https://007v7c5lhg.execute-api.ap-south-1.amazonaws.com/GetUsers',
+        { email: adminEmail }
+      );
+
+      const rawUsers = response.data.users || [];
+
+      const formattedUsers = rawUsers.map((user: any) => {
+        return {
+          id: user.email, // using email as fallback ID
+          name: user.full_name || user.username || 'N/A',
+          email: user.email,
+          status: user.email_verified ? 'Active' : 'Inactive',
+          plan: (() => {
+            const planName = (user.plan?.name || '').toLowerCase();
+            switch (planName) {
+              case 'trial': return 'Demo';
+              case 'basic': return 'Free';
+              case 'premium': return 'Premium';
+              case 'demo': return 'Demo';
+              default: return planName || 'Free';
+            }
+          })(),
+          paidAmount: 0, // or you can derive from elsewhere if needed
+          paymentDate: user.plan?.start_date || null,
+          nextPaymentDate: user.plan?.end_date || null,
+          addOns: {},
+          customPlan: null,
+          usage: {
+            simulationsThisMonth: user.statistics?.total_scenarios_completed || 0,
+            totalSimulations: user.statistics?.total_app_sessions || 0,
+          },
+          registrationDate: user.created_at
+            ? new Date(user.created_at).toLocaleDateString()
+            : 'N/A',
+          scenarios: user.scenarios || [],
+        };
+      });
+
+      setUsers(formattedUsers);
+    } catch (error) {
+      console.error('Error fetching users from AWS:', error);
+      setUsers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchUsers();
+}, []);
+
 
  const [sortConfig, setSortConfig] = useState<{ key: string | null, direction: 'asc' | 'desc' }>({
     key: null,
