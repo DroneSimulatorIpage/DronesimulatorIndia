@@ -4,15 +4,18 @@ import { Trash2, Eye } from 'lucide-react';
 import { Dialog } from '@headlessui/react';
 
 interface Inquiry {
+  submitted_at: string | number | Date;
   id: number;
+  inquiryId: string;
   full_name: string;
   email: string;
   phone_number: string;
   organization: string;
   i_am: string;
   purpose_of_contact: string;
-  created_at: string;
+ 
 }
+
 
 // 🔧 CSV Export Utility
 const exportToCSV = (data: Inquiry[], filename: string) => {
@@ -29,7 +32,7 @@ const exportToCSV = (data: Inquiry[], filename: string) => {
       inquiry.organization,
       inquiry.i_am,
       inquiry.purpose_of_contact,
-      new Date(inquiry.created_at).toLocaleString()
+      new Date(inquiry.submitted_at).toLocaleString()
     ].map(val => `"${String(val).replace(/"/g, '""')}"`);
     csvRows.push(row.join(','));
   });
@@ -53,19 +56,27 @@ const AdminInquiries: React.FC = () => {
   const [endDate, setEndDate] = useState('');
   const [quickFilter, setQuickFilter] = useState('');
 
-  const fetchInquiries = async () => {
-    try {
-      const token = sessionStorage.getItem('drone_auth_token');
-      const response = await axios.get('https://34-47-194-149.nip.io/api/inquiry/admin/all/', {
-        headers: { Authorization: `Token ${token}` },
-      });
-      setInquiries(response.data.results);
-    } catch (error) {
-      console.error('Error fetching inquiries:', error);
-    } finally {
-      setLoading(false);
+const fetchInquiries = async () => {
+  try {
+    const email = sessionStorage.getItem('admin_email');
+    if (!email) return;
+
+    const response = await axios.get(
+      `https://bmzdejy2ek.execute-api.ap-south-1.amazonaws.com/GetallSales?email=${encodeURIComponent(email)}`
+    );
+
+    if (response.status === 200) {
+      const data = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+      setInquiries(data);
     }
-  };
+  } catch (error) {
+    console.error('Error fetching inquiries:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   const handleDelete = async (id: number) => {
     if (!window.confirm('Are you sure you want to delete this inquiry?')) return;
@@ -90,16 +101,16 @@ const AdminInquiries: React.FC = () => {
     setSelectedInquiry(null);
   };
 
-  const isWithin = (dateStr: string, days: number): boolean => {
-    const now = new Date();
-    const date = new Date(dateStr);
-    const diffTime = now.getTime() - date.getTime();
-    const diffDays = diffTime / (1000 * 60 * 60 * 24);
-    return diffDays <= days;
-  };
+  const isWithin = (dateInput: string | number | Date, days: number): boolean => {
+  const now = new Date();
+  const date = new Date(dateInput);
+  const diffTime = now.getTime() - date.getTime();
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+  return diffDays <= days;
+};
 
   const filteredInquiries = inquiries.filter((inq) => {
-    const createdAt = new Date(inq.created_at);
+    const createdAt = new Date(inq.submitted_at);
     const from = startDate ? new Date(startDate) : null;
     const to = endDate ? new Date(endDate) : null;
     const matchesDateRange = (!from || createdAt >= from) && (!to || createdAt <= to);
@@ -111,9 +122,9 @@ const AdminInquiries: React.FC = () => {
         createdAt.getMonth() === today.getMonth() &&
         createdAt.getFullYear() === today.getFullYear()
       );
-    } else if (quickFilter === '7days') return isWithin(inq.created_at, 7);
-    else if (quickFilter === '1month') return isWithin(inq.created_at, 30);
-    else if (quickFilter === '1year') return isWithin(inq.created_at, 365);
+    } else if (quickFilter === '7days') return isWithin(inq.submitted_at, 7);
+    else if (quickFilter === '1month') return isWithin(inq.submitted_at, 30);
+    else if (quickFilter === '1year') return isWithin(inq.submitted_at, 365);
 
     return matchesDateRange;
   });
@@ -225,7 +236,7 @@ const AdminInquiries: React.FC = () => {
               <td className="px-4 py-3 text-sm text-gray-600">{inquiry.email}</td>
               <td className="px-4 py-3 text-sm text-gray-600">{inquiry.phone_number}</td>
               <td className="px-4 py-3 text-sm text-gray-700">{inquiry.purpose_of_contact}</td>
-              <td className="px-4 py-3 text-sm text-gray-500">{new Date(inquiry.created_at).toLocaleDateString()}</td>
+              <td className="px-4 py-3 text-sm text-gray-500">{new Date(inquiry.submitted_at).toLocaleDateString()}</td>
               <td className="px-4 py-3 text-sm">
                 <button onClick={() => openDialog(inquiry)} className="text-blue-500 hover:text-blue-700 mr-2">
                   <Eye size={16} />
@@ -249,7 +260,7 @@ const AdminInquiries: React.FC = () => {
             <p><strong>Organization:</strong> {selectedInquiry.organization}</p>
             <p><strong>I am:</strong> {selectedInquiry.i_am}</p>
             <p><strong>Purpose:</strong> {selectedInquiry.purpose_of_contact}</p>
-            <p><strong>Submitted on:</strong> {new Date(selectedInquiry.created_at).toLocaleString()}</p>
+            <p><strong>Submitted on:</strong> {new Date(selectedInquiry.submitted_at).toLocaleString()}</p>
             <div className="mt-4 text-right">
               <button onClick={closeDialog} className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">
                 Close
