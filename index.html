@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drone Simulator</title>
+    <meta
+      name="description"
+      content="Experience realistic drone flight simulation with geofencing, and advanced RTL features. Download now!"
+    />
+    <meta name="author" content="Drone Simulator" />
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="/images/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta
+      property="og:title"
+      content="Drone Simulator Pro: Realistic Training for Enthusiasts & Defense Professionals"
+    />
+    <meta
+      property="og:description"
+      content=" Discover the ultimate drone flying experience with Drone Simulator Pro. Our advanced simulator offers realistic training for drone enthusiasts and defense professionals and beyond. Start your flight journey today!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/logosquare.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Drone_Simulator" />
+    <meta name="twitter:image" content="/images/logosquare.png" />
+  </head>
+
+  <body>
+    <!-- Flowise Chatbot Integration for Drone Simulator -->
+    <script type="module">
+      import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+      Chatbot.init({
+        chatflowid: "6347d04f-cf4e-4eb5-b955-186951bfb1a7",
+        apiHost: "https://srv1006227.hstgr.cloud",
+        chatflowConfig: {},
+        observersConfig: {},
+        theme: {
+          button: {
+            backgroundColor: "#F97316",
+            right: 20,
+            bottom: 20,
+            size: 50,
+            borderRadius: 14,
+            dragAndDrop: true,
+            iconColor: "#ffffff",
+            customIconSrc: "/images/favicon.png",
+            autoWindowOpen: {
+              autoOpen: false,
+              openDelay: 3,
+              autoOpenOnMobile: false,
+            },
+          },
+
+          chatWindow: {
+            showTitle: true,
+            showAgentMessages: true,
+            title: "Drone Simulator Support",
+            titleAvatarSrc: "/images/favicon.png",
+            titleTextColor: "#ffffff",
+            welcomeMessage: "Hello! How can I assist you today?",
+            errorMessage: "Oops! Something went wrong. Please try again later.",
+            backgroundColor: "#FFF7ED",
+
+            height: 500,
+            width: 350,
+            fontSize: 13,
+            fontFamily: "'Poppins', sans-serif",
+
+            roundedCorners: true,
+            clearChatOnReload: false,
+            sourceDocsTitle: "Helpful Resources:",
+            renderHTML: true,
+            boxShadow: "0 10px 30px rgba(249, 115, 22, 0.15)",
+
+            botMessage: {
+              backgroundColor: "#FED7AA",
+              textColor: "#7C270E",
+              showAvatar: true,
+              avatarSrc: "/images/favicon.png",
+            },
+            userMessage: {
+              backgroundColor: "#F97316",
+              textColor: "#ffffff",
+              showAvatar: true,
+              avatarSrc: "/images/user.png",
+            },
+            textInput: {
+              placeholder: "Type your message here...",
+              backgroundColor: "#ffffff",
+              textColor: "#92400E",
+              borderRadius: 12,
+              boxShadow: "inset 0 1px 3px rgba(156, 126, 82, 0.25)",
+              sendButtonColor: "#F97316",
+              maxChars: 200,
+              maxCharsWarningMessage:
+                "Please limit your message to 200 characters.",
+              autoFocus: true,
+            },
+            feedback: {
+              color: "#7C270E",
+            },
+            dateTimeToggle: {
+              date: true,
+              time: true,
+            },
+            footer: {
+              textColor: "#92400E",
+              text: "Powered by",
+              company: "Drone Simulator.in",
+              companyLink: "https://dronesimulator.in",
+            },
+          },
+        },
+      });
+    </script>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
