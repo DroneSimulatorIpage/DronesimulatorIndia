@@ -29,7 +29,7 @@ const DownloadAdmin: React.FC = () => {
   const fetchDownloads = async () => {
     try {
       const token = sessionStorage.getItem('drone_auth_token');
-      const response = await axios.get('https://34-47-194-149.nip.io/api/get-all-downloads/', {
+      const response = await axios.get('https://34-124-167-179.nip.io/api/get-all-downloads/', {
         headers: { Authorization: `Token ${token}` },
       });
       setDownloads(response.data.data || []);
@@ -45,7 +45,7 @@ const DownloadAdmin: React.FC = () => {
 
     try {
       const token = sessionStorage.getItem('drone_auth_token');
-      const response = await axios.delete('https://34-47-194-149.nip.io/api/delete-download-record/', {
+      const response = await axios.delete('https://34-124-167-179.nip.io/api/delete-download-record/', {
         headers: {
           Authorization: `Token ${token}`,
           'Content-Type': 'application/json',

@@ -167,7 +167,7 @@ const Profile: React.FC = () => {
         const { email } = JSON.parse(storedUser)
 
         // Fetch user details
-        const userRes = await fetch('https://34-47-194-149.nip.io/api/get-single-user-details/', {
+        const userRes = await fetch('https://34-124-167-179.nip.io/api/get-single-user-details/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ const Profile: React.FC = () => {
         }
 
         // Fetch stripe transactions
-        const stripeRes = await fetch('https://34-47-194-149.nip.io/api/stripe/my-transactions/', {
+        const stripeRes = await fetch('https://34-124-167-179.nip.io/api/stripe/my-transactions/', {
           headers: {
             Authorization: `Token ${token}`
           }
@@ -322,7 +322,7 @@ const Profile: React.FC = () => {
     }
 
     try {
-      const response = await fetch('https://34-47-194-149.nip.io/api/update-user-details/', {
+      const response = await fetch('https://34-124-167-179.nip.io/api/update-user-details/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

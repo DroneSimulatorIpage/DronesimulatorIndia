@@ -17,7 +17,7 @@ export const useAuthProvider = (): AuthState => {
 
   const login = useCallback(async (email: string, password: string, role: UserRole): Promise<boolean> => {
   try {
-    const response = await fetch('https://34-47-194-149.nip.io/api/login/', {
+    const response = await fetch('https://34-124-167-179.nip.io/api/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

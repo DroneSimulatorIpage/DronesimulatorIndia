@@ -75,7 +75,7 @@ const handleSave = async () => {
   setLoading(true);
   try {
     const response = await axios.post(
-      'https://34-47-194-149.nip.io/api/admin/create-user/',
+      'https://34-124-167-179.nip.io/api/admin/create-user/',
       requestBody,
       {
         headers: {

@@ -20,7 +20,7 @@ const handleCheckout = async () => {
   }
 
   try {
-    const response = await fetch('https://34-47-194-149.nip.io/api/stripe/create-checkout-session/', {
+    const response = await fetch('https://34-124-167-179.nip.io/api/stripe/create-checkout-session/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

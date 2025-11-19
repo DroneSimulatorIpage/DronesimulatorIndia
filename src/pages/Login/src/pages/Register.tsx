@@ -256,7 +256,7 @@ const Register: React.FC = () => {
         purpose_of_use: formData.purpose_of_use === 'other' ? formData.purpose_other : formData.purpose_of_use
       };
 
-      const response = await fetch('https://34-47-194-149.nip.io/api/register/', {
+      const response = await fetch('https://34-124-167-179.nip.io/api/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

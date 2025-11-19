@@ -8,6 +8,7 @@ const FlyToWinBanner = () => {
   const handleClick = () => {
     navigate('/download');
   };
+  
 
   // return (
   //   // <section className="py-4">
