@@ -55,7 +55,7 @@ const AdminFeedbacks: React.FC = () => {
   const fetchFeedbacks = async () => {
     try {
       const token = sessionStorage.getItem('drone_auth_token');
-      const response = await axios.get('https://34-47-194-149.nip.io/api/feedback/admin/all/', {
+      const response = await axios.get('https://34-124-167-179.nip.io/api/feedback/admin/all/', {
         headers: { Authorization: `Token ${token}` },
       });
       setFeedbacks(response.data.results || []);
@@ -70,7 +70,7 @@ const AdminFeedbacks: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this feedback?')) return;
     try {
       const token = sessionStorage.getItem('drone_auth_token');
-      await axios.delete(`https://34-47-194-149.nip.io/api/feedback/admin/${id}/delete/`, {
+      await axios.delete(`https://34-124-167-179.nip.io/api/feedback/admin/${id}/delete/`, {
         headers: { Authorization: `Token ${token}` },
       });
       setFeedbacks(prev => prev.filter(f => f.id !== id));

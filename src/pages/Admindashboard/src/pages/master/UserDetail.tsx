@@ -22,7 +22,7 @@ export const MasterUserDetail: React.FC = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const userDetailsRes = await axios.post('https://34-47-194-149.nip.io/api/get-single-user-details/', {
+        const userDetailsRes = await axios.post('https://34-124-167-179.nip.io/api/get-single-user-details/', {
           email: email
         });
 
@@ -169,7 +169,7 @@ export const MasterUserDetail: React.FC = () => {
 
     try {
       await axios.put(
-        `https://34-47-194-149.nip.io/api/update-user-details/`,
+        `https://34-124-167-179.nip.io/api/update-user-details/`,
         {
           email: editData.email,
           full_name: editData.name,

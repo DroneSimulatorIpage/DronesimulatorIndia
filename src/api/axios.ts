@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://34-47-194-149.nip.io/api/',
+  baseURL: 'https://34-124-167-179.nip.io/api/',
   headers: {
     'Content-Type': 'application/json',
   },

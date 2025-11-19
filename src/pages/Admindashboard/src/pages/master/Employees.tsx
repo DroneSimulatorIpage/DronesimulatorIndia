@@ -18,7 +18,7 @@ useEffect(() => {
         return;
       }
 
-      const res = await axios.get('https://34-47-194-149.nip.io/api/admin/groups/', {
+      const res = await axios.get('https://34-124-167-179.nip.io/api/admin/groups/', {
         headers: {
           Authorization: `Token ${token}`
         }

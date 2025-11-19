@@ -33,10 +33,10 @@ export const MasterIncome: React.FC = () => {
 
     try {
       const [analyticsRes, transactionsRes] = await Promise.all([
-        fetch('https://34-47-194-149.nip.io/api/stripe/analytics/', {
+        fetch('https://34-124-167-179.nip.io/api/stripe/analytics/', {
           headers: { Authorization: `Token ${token}` },
         }),
-        fetch('https://34-47-194-149.nip.io/api/stripe/transactions/', {
+        fetch('https://34-124-167-179.nip.io/api/stripe/transactions/', {
           headers: { Authorization: `Token ${token}` },
         }),
       ]);

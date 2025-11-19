@@ -44,7 +44,7 @@ const Login: React.FC = () => {
     setIsLoading(true)
 
     try {
-      const response = await fetch('https://34-47-194-149.nip.io/api/login/', {
+      const response = await fetch('https://34-124-167-179.nip.io/api/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
       const email = decoded.email
       const username = decoded.name || email.split('@')[0]
 
-      const response = await fetch('https://34-47-194-149.nip.io/api/social-login/', {
+      const response = await fetch('https://34-124-167-179.nip.io/api/social-login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: credentialResponse.credential, email, username })

@@ -56,7 +56,7 @@ const AdminInquiries: React.FC = () => {
   const fetchInquiries = async () => {
     try {
       const token = sessionStorage.getItem('drone_auth_token');
-      const response = await axios.get('https://34-47-194-149.nip.io/api/inquiry/admin/all/', {
+      const response = await axios.get('https://34-124-167-179.nip.io/api/inquiry/admin/all/', {
         headers: { Authorization: `Token ${token}` },
       });
       setInquiries(response.data.results);
@@ -71,7 +71,7 @@ const AdminInquiries: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this inquiry?')) return;
     try {
       const token = sessionStorage.getItem('drone_auth_token');
-      await axios.delete(`https://34-47-194-149.nip.io/api/inquiry/admin/${id}/delete/`, {
+      await axios.delete(`https://34-124-167-179.nip.io/api/inquiry/admin/${id}/delete/`, {
         headers: { Authorization: `Token ${token}` },
       });
       setInquiries(prev => prev.filter(i => i.id !== id));

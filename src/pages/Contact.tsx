@@ -45,7 +45,7 @@ const Contact = () => {
     if (!token) return;
 
     try {
-      const res = await fetch("https://34-47-194-149.nip.io/api/contact/my/", {
+      const res = await fetch("https://34-124-167-179.nip.io/api/contact/my/", {
         headers: { Authorization: `Token ${token}` }
       });
       if (res.ok) {
@@ -72,7 +72,7 @@ const Contact = () => {
     }
 
     try {
-      const response = await fetch("https://34-47-194-149.nip.io/api/contact/", {
+      const response = await fetch("https://34-124-167-179.nip.io/api/contact/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,7 +113,7 @@ const Contact = () => {
     if (!token || !isAdmin) return;
 
     try {
-      const res = await fetch(`https://34-47-194-149.nip.io/api/contact/admin/${id}/delete/`, {
+      const res = await fetch(`https://34-124-167-179.nip.io/api/contact/admin/${id}/delete/`, {
         method: "DELETE",
         headers: { Authorization: `Token ${token}` }
       });

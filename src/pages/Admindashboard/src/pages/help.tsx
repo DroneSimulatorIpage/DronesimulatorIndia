@@ -75,7 +75,7 @@ const HelpPage: React.FC = () => {
         });
 
         try {
-            const response = await fetch("https://34-47-194-149.nip.io/api/feedback/", {
+            const response = await fetch("https://34-124-167-179.nip.io/api/feedback/", {
                 method: "POST",
                 headers: {
                     Authorization: `Token ${token}`,
