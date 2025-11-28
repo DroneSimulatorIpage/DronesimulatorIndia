@@ -5,7 +5,7 @@ import plans from '../data/plans';
 const PlansSection: React.FC = () => {
   return (
     <section id="plans" className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Choose Your <span className="text-orange-500">Plan</span>
@@ -16,12 +16,12 @@ const PlansSection: React.FC = () => {
         </div>
         
         <div className="relative max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
             {plans.map((plan) => (
-              <div key={plan.id} className="relative">
+              <div key={plan.id} className="relative group">
                 {plan.mostPopular && (
-                  <div className="absolute -top-7 left-0 right-0 flex justify-center">
-                    <div className="bg-orange-500 text-white text-sm font-semibold px-4 py-1.5 rounded-lg shadow-md">
+                  <div className="absolute -top-7 left-0 right-0 flex justify-center z-10">
+                    <div className="bg-orange-500 text-white text-sm font-semibold px-4 py-1.5 rounded-lg shadow-md transform transition-transform duration-300 group-hover:scale-105">
                       Most Popular
                     </div>
                   </div>
