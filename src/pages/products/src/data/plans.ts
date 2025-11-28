@@ -16,24 +16,24 @@ const plans: Plan[] = [
     mostPopular: false,
     stripe_price_id: 'price_1RcJttCKYG7gRDVPBkHPkocp'
   },
-  {
-    id: 'Student',
-    name: 'Student Plan',
-    price: 9.99,
-    originalPrice: 99.99,
-    billing: 'USD per year ($99.99) (90% Off)',
-    features: [
-      'Available Drones-3: Agriculture Drone, DJI Mavic, Crystalball Model V',
-      'Permitted Zones-3: (Standard): RPTO Ground, Agriculture, Rail-Road-Canal-Bridge',
-      'Free Flight, Drawing & Automation modes',
-      'Only .edu or .ac emails are allowed.',
+  // {
+  //   id: 'Student',
+  //   name: 'Student Plan',
+  //   price: 9.99,
+  //   originalPrice: 99.99,
+  //   billing: 'USD per year ($99.99) (90% Off)',
+  //   features: [
+  //     'Available Drones-3: Agriculture Drone, DJI Mavic, Crystalball Model V',
+  //     'Permitted Zones-3: (Standard): RPTO Ground, Agriculture, Rail-Road-Canal-Bridge',
+  //     'Free Flight, Drawing & Automation modes',
+  //     'Only .edu or .ac emails are allowed.',
 
-    ],
-    buttonText: 'Add to Cart',
-    buttonVariant: 'primary',
-    mostPopular: false,
-    stripe_price_id: 'price_1ReFCPCKYG7gRDVPCr3307yG'
-  },
+  //   ],
+  //   buttonText: 'Add to Cart',
+  //   buttonVariant: 'primary',
+  //   mostPopular: false,
+  //   stripe_price_id: 'price_1ReFCPCKYG7gRDVPCr3307yG'
+  // },
   {
     id: 'zone',
     name: 'Zone Plan',
